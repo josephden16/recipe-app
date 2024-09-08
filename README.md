@@ -1,4 +1,4 @@
-# Full Stack Recipe Management System
+# Recipe App
 
 This project is a full-stack web application that allows users to manage a collection of recipes. Users can create, view, update, and delete recipes. Each recipe includes a title, ingredients, instructions, and an optional image.
 
