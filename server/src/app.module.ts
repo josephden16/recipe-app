@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { RecipesModule } from './recipes/recipes.module';
+import { CloudinaryModule } from './cloudinary/cloudinary.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { RecipesModule } from './recipes/recipes.module';
         uri: configService.get<string>('MONGODB_URI'),
       }),
     }),
+    CloudinaryModule,
     RecipesModule,
   ],
   controllers: [],

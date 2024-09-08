@@ -13,43 +13,50 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { RecipesService } from './recipes.service';
 import { CreateRecipeDto, UpdateRecipeDto } from './recipes.dto';
-import { Recipe } from './recipe.schema';
 
 @Controller('recipes')
 export class RecipesController {
   constructor(private readonly recipesService: RecipesService) {}
 
   @Get()
-  async getRecipes(
-    @Query('page') page = 1,
-    @Query('limit') limit = 10,
-  ): Promise<Recipe[]> {
+  async getRecipes(@Query('page') page = 1, @Query('limit') limit = 10) {
     return this.recipesService.findAll(page, limit);
   }
 
   @Get(':id')
-  async getRecipeById(@Param('id') id: string): Promise<Recipe> {
+  async getRecipeById(@Param('id') id: string) {
     return this.recipesService.findById(id);
   }
 
   @Post()
-  @UseInterceptors(FileInterceptor('image'))
+  @UseInterceptors(
+    FileInterceptor('image', {
+      limits: { fileSize: 1 * 1024 * 1024, files: 1 },
+    }),
+  )
   async createRecipe(
     @Body() createRecipeDto: CreateRecipeDto,
     @UploadedFile() file: Express.Multer.File,
-  ): Promise<Recipe> {
+  ) {
     return this.recipesService.create(createRecipeDto, file);
   }
+
   @Put(':id')
+  @UseInterceptors(
+    FileInterceptor('image', {
+      limits: { fileSize: 1 * 1024 * 1024, files: 1 },
+    }),
+  )
   async updateRecipe(
     @Param('id') id: string,
     @Body() updateRecipeDto: UpdateRecipeDto,
-  ): Promise<Recipe> {
-    return this.recipesService.update(id, updateRecipeDto);
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    return this.recipesService.update(id, updateRecipeDto, file);
   }
 
   @Delete(':id')
-  async deleteRecipe(@Param('id') id: string): Promise<void> {
+  async deleteRecipe(@Param('id') id: string): Promise<{ message: string }> {
     return this.recipesService.delete(id);
   }
 }

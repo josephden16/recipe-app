@@ -11,6 +11,9 @@ export class Recipe extends Document {
 
   @Prop({ type: [String], required: true })
   ingredients: string[];
+
+  @Prop({ required: false })
+  imageUrl: string;
 }
 
 export const RecipeSchema = SchemaFactory.createForClass(Recipe);
