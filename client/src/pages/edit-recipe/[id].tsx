@@ -1,5 +1,4 @@
 import { useForm } from "react-hook-form";
-import axios from "axios";
 import { GetServerSideProps } from "next";
 import { useRouter } from "next/router";
 import { useState } from "react";
@@ -49,7 +48,7 @@ const EditRecipePage = ({ recipe }: { recipe: Recipe }) => {
     if (file) formData.append("image", file);
 
     try {
-      await axios.put(`/api/recipes/${recipe._id}`, formData, {
+      await api.put(`/api/recipes/${recipe._id}`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
