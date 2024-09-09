@@ -7,7 +7,7 @@ export class Recipe extends Document {
   title: string;
 
   @Prop({ required: true })
-  description: string;
+  instructions: string;
 
   @Prop({ type: [String], required: true })
   ingredients: string[];

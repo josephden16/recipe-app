@@ -12,8 +12,8 @@ export class CreateRecipeDto {
   readonly title: string;
 
   @IsString()
-  @IsNotEmpty({ message: 'Recipe description is required' })
-  readonly description: string;
+  @IsNotEmpty({ message: 'Recipe instructions is required' })
+  readonly instructions: string;
 
   @IsArray()
   @ArrayMinSize(1, { message: 'At least one ingredient is required' })
@@ -31,7 +31,7 @@ export class UpdateRecipeDto {
 
   @IsString()
   @IsOptional()
-  readonly description?: string;
+  readonly instructions?: string;
 
   @IsArray()
   @ArrayMinSize(1, { message: 'At least one ingredient is required' })
