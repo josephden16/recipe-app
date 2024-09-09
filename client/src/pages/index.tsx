@@ -54,7 +54,7 @@ const HomePage = () => {
             ))
           ) : error ? (
             <p className="text-red-500">{error}</p>
-          ) : recipes.length > 1 ? (
+          ) : recipes.length > 0 ? (
             recipes.map((recipe) => (
               <div key={recipe._id} className="border p-4 rounded shadow-md">
                 {recipe.imageUrl && (
