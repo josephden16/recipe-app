@@ -87,24 +87,26 @@ const HomePage = () => {
             </div>
           )}
         </div>
-        <div className="mt-4 flex justify-between">
-          {page > 1 && (
-            <button
-              onClick={() => setPage(page - 1)}
-              className="btn btn-primary"
-            >
-              Previous
-            </button>
-          )}
-          {hasNextPage && (
-            <button
-              onClick={() => setPage(page + 1)}
-              className="btn btn-primary"
-            >
-              Next
-            </button>
-          )}
-        </div>
+        {!loading && !error && (
+          <div className="mt-4 flex justify-between">
+            {page > 1 && (
+              <button
+                onClick={() => setPage(page - 1)}
+                className="btn btn-primary"
+              >
+                Previous
+              </button>
+            )}
+            {hasNextPage && (
+              <button
+                onClick={() => setPage(page + 1)}
+                className="btn btn-primary"
+              >
+                Next
+              </button>
+            )}
+          </div>
+        )}
       </div>
     </>
   );
