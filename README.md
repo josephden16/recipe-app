@@ -86,5 +86,5 @@ The goal is to build a recipe management system using a Next.js frontend and a N
 - **Frontend:** Deployed on Vercel.
 - **Backend:** Deployed on Render.
 - Links to the deployed applications:
-  - Frontend: [Vercel Link](https://your-vercel-link)
-  - Backend: [https://recipe-app-volg.onrender.com/api/recipes](https://recipe-app-volg.onrender.com)
+  - Frontend: [https://recipe-app-nu-drab.vercel.app](https://recipe-app-nu-drab.vercel.app)
+  - Backend: [https://recipe-app-volg.onrender.com](https://recipe-app-volg.onrender.com)
