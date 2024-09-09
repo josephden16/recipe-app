@@ -9,6 +9,7 @@ import {
   Query,
   UseInterceptors,
   UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { RecipesService } from './recipes.service';
@@ -32,6 +33,15 @@ export class RecipesController {
   @UseInterceptors(
     FileInterceptor('image', {
       limits: { fileSize: 1 * 1024 * 1024, files: 1 },
+      fileFilter: (req, file, cb) => {
+        if (!file.mimetype.startsWith('image/')) {
+          return cb(
+            new BadRequestException('Only image files are allowed'),
+            false,
+          );
+        }
+        cb(null, true);
+      },
     }),
   )
   async createRecipe(
@@ -45,6 +55,15 @@ export class RecipesController {
   @UseInterceptors(
     FileInterceptor('image', {
       limits: { fileSize: 1 * 1024 * 1024, files: 1 },
+      fileFilter: (req, file, cb) => {
+        if (!file.mimetype.startsWith('image/')) {
+          return cb(
+            new BadRequestException('Only image files are allowed'),
+            false,
+          );
+        }
+        cb(null, true);
+      },
     }),
   )
   async updateRecipe(

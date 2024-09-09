@@ -27,9 +27,16 @@ const EditRecipePage = ({ recipe }: { recipe: Recipe }) => {
     },
   });
   const [file, setFile] = useState<File | null>(null);
+  const [fileError, setFileError] = useState<string | null>(null);
+
   const router = useRouter();
 
   const onSubmit = async (data: UpdateRecipeForm) => {
+    if (file && !file.type.startsWith("image/")) {
+      setFileError("Only image files are allowed.");
+      return;
+    }
+
     const ingredients = data.ingredients
       .split(",")
       .map((ingredient: string) => ingredient.trim());
@@ -121,6 +128,7 @@ const EditRecipePage = ({ recipe }: { recipe: Recipe }) => {
               }
               className="input"
             />
+            {fileError && <p className="text-red-500 text-sm">{fileError}</p>}
           </div>
           <button type="submit" className="btn btn-primary">
             Update Recipe
