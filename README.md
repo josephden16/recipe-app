@@ -9,6 +9,7 @@ This project is a full-stack web application that allows users to manage a colle
 - [Setup Instructions](#setup-instructions)
 - [API Endpoints](#api-endpoints)
 - [Deployment](#deployment)
+- [Testing](#testing)
 
 ## Objective
 
@@ -80,6 +81,42 @@ The goal is to build a recipe management system using a Next.js frontend and a N
 - **POST /api/recipes**: Create a new recipe.
 - **PUT /api/recipes/:id**: Update an existing recipe.
 - **DELETE /api/recipes/:id**: Delete a recipe.
+
+## Testing
+
+This project includes tests to ensure the reliability and correctness of the codebase. The tests are written using `Jest` and `React Testing Library` for the frontend and `Jest` for the backend.
+
+### Running Tests
+
+To run the tests for both the frontend and backend, follow these steps:
+
+#### Frontend (Next.js)
+
+1. Navigate to the client folder:
+
+   ```bash
+   cd client
+   ```
+
+2. Run the tests:
+
+   ```bash
+   npm test
+   ```
+
+#### Backend (Nest.js)
+
+1. Navigate to the server folder:
+
+   ```bash
+   cd server
+   ```
+
+2. Run the tests:
+
+   ```bash
+   npm test
+   ```
 
 ## Deployment
 
