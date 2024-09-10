@@ -1,85 +1,217 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="120" alt="Nest Logo" /></a>
-</p>
+# Recipe App - Backend
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+This is the **backend** part of the Recipe app built using **Nest.js**. It provides the necessary API endpoints for creating, updating, deleting, and fetching recipes. The backend integrates with **MongoDB** for data storage and **Cloudinary** for image uploads.
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg" alt="Donate us"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow" alt="Follow us on Twitter"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
+## Table of Contents
 
-## Description
+- [Features](#features)
+- [Technologies](#technologies)
+- [Setup Instructions](#setup-instructions)
+- [Project Structure](#project-structure)
+- [Running the Application](#running-the-application)
+- [API Endpoints](#api-endpoints)
+- [Environment Variables](#environment-variables)
+- [Testing](#testing)
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+## Features
 
-## Project setup
+- RESTful API with CRUD operations for managing recipes.
+- Image upload and storage via **Cloudinary**.
+- MongoDB for recipe data storage.
+- Data validation with **class-validator**.
+- Exception handling for proper API error responses.
+
+## Technologies
+
+- **Nest.js** (Node.js Framework)
+- **MongoDB** for the database
+- **Mongoose** for MongoDB object modeling
+- **Cloudinary** for image uploads
+- **TypeScript** for type safety
+- **Jest** for unit testing
+
+## Setup Instructions
+
+### Prerequisites
+
+Ensure you have the following installed on your local machine:
+
+- **Node.js** (v14 or higher)
+- **MongoDB**
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/josephden16/recipe-app.git
+   ```
+
+2. Navigate to the `server` folder:
+
+   ```bash
+   cd recipe-app/server
+   ```
+
+3. Install the project dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Set up the environment variables:
+
+   - Copy the `.env.example` file to `.env`:
+
+     ```bash
+     cp .env.example .env
+     ```
+
+   - Update the `.env` file with your environment variables (MongoDB connection, Cloudinary API keys, etc.).
+
+### MongoDB Setup
+
+Make sure to have **MongoDB** running locally or use a MongoDB Atlas instance. Update the MongoDB URI in the `.env` file with your database connection string:
 
 ```bash
-$ yarn install
+MONGO_URI=mongodb://localhost:27017/recipe-app
 ```
 
-## Compile and run the project
+## Project Structure
+
+The backend project structure is organized as follows:
 
 ```bash
-# development
-$ yarn run start
-
-# watch mode
-$ yarn run start:dev
-
-# production mode
-$ yarn run start:prod
+server
+│
+├── src/
+│   ├── cloudinary/       # Cloudinary module
+│   ├── common/           # Common utilities (interceptors, filters, etc.)
+│   ├── recipes/          # Recipes module (controller, service, schema)
+│   ├── app.module.ts     # Root module
+│   ├── main.ts           # Entry point of the application
+│
+├── test/                 # Tests
+├── .env.example          # Example environment variables file
+├── jest.config.js        # Jest configuration
+├── package.json          # Dependencies and scripts
+├── tsconfig.json         # TypeScript configuration
+└── README.md             # This documentation
 ```
 
-## Run tests
+## Running the Application
+
+1. Start the MongoDB server (if running locally):
+
+   ```bash
+   mongod
+   ```
+
+2. Run the Nest.js application in development mode:
+
+   ```bash
+   npm run start:dev
+   ```
+
+The backend server should now be running at `http://localhost:3001`.
+
+### Building for Production
+
+To create a production build:
 
 ```bash
-# unit tests
-$ yarn run test
-
-# e2e tests
-$ yarn run test:e2e
-
-# test coverage
-$ yarn run test:cov
+npm run build
 ```
 
-## Resources
+To run the production build:
 
-Check out a few resources that may come in handy when working with NestJS:
+```bash
+npm run start:prod
+```
 
-- Visit the [NestJS Documentation](https://docs.nestjs.com) to learn more about the framework.
-- For questions and support, please visit our [Discord channel](https://discord.gg/G7Qnnhy).
-- To dive deeper and get more hands-on experience, check out our official video [courses](https://courses.nestjs.com/).
-- Visualize your application graph and interact with the NestJS application in real-time using [NestJS Devtools](https://devtools.nestjs.com).
-- Need help with your project (part-time to full-time)? Check out our official [enterprise support](https://enterprise.nestjs.com).
-- To stay in the loop and get updates, follow us on [X](https://x.com/nestframework) and [LinkedIn](https://linkedin.com/company/nestjs).
-- Looking for a job, or have a job to offer? Check out our official [Jobs board](https://jobs.nestjs.com).
+## API Endpoints
 
-## Support
+The backend provides the following RESTful API endpoints:
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+- **GET /api/recipes**: Fetch all recipes with pagination.
+- **GET /api/recipes/:id**: Fetch a single recipe by ID.
+- **POST /api/recipes**: Create a new recipe (with image upload).
+- **PUT /api/recipes/:id**: Update an existing recipe by ID.
+- **DELETE /api/recipes/:id**: Delete a recipe by ID.
 
-## Stay in touch
+### Example API Usage
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+1. **Create a new recipe** (with image upload):
 
-## License
+   ```bash
+   POST /api/recipes
+   Content-Type: multipart/form-data
 
-Nest is [MIT licensed](https://github.com/nestjs/nest/blob/master/LICENSE).
+   {
+     "title": "Recipe Title",
+     "instructions": "Step-by-step instructions",
+     "ingredients": ["ingredient 1", "ingredient 2"],
+     "image": <image-file>
+   }
+   ```
+
+2. **Update a recipe**:
+
+   ```bash
+   PUT /api/recipes/:id
+   Content-Type: application/json
+
+   {
+     "title": "Updated Title",
+     "instructions": "Updated instructions",
+     "ingredients": ["ingredient 1", "ingredient 2"]
+   }
+   ```
+
+3. **Fetch a list of recipes**:
+
+   ```bash
+   GET /api/recipes?page=1&limit=10
+   ```
+
+## Environment Variables
+
+The application requires several environment variables to run properly. These should be defined in a `.env` file located in the root of the `server` folder.
+
+### Required Variables:
+
+```bash
+MONGO_URI=mongodb://localhost:27017/recipe-app
+CLOUDINARY_CLOUD_NAME=your-cloudinary-cloud-name
+CLOUDINARY_API_KEY=your-cloudinary-api-key
+CLOUDINARY_API_SECRET=your-cloudinary-api-secret
+PORT=5000
+```
+
+- **MONGO_URI**: MongoDB connection string.
+- **CLOUDINARY_CLOUD_NAME**, **CLOUDINARY_API_KEY**, **CLOUDINARY_API_SECRET**: Cloudinary credentials for image uploads.
+- **PORT**: The port on which the backend server will run.
+
+## Testing
+
+To ensure the backend is working as expected, unit tests have been written using **Jest**.
+
+### Running Tests
+
+1. Run all tests:
+
+   ```bash
+   npm run test
+   ```
+
+2. Run tests in watch mode:
+
+   ```bash
+   npm run test:watch
+   ```
+
+3. Generate test coverage report:
+
+   ```bash
+   npm run test:cov
+   ```
