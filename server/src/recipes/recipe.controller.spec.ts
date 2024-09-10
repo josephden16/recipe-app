@@ -14,14 +14,14 @@ describe('RecipesController', () => {
           {
             _id: '1',
             title: 'Recipe 1',
-            description: 'Description 1',
+            instructions: 'instructions 1',
             ingredients: ['ingredient 1'],
             imageUrl: '',
           },
           {
             _id: '2',
             title: 'Recipe 2',
-            description: 'Description 2',
+            instructions: 'instructions 2',
             ingredients: ['ingredient 2'],
             imageUrl: '',
           },
@@ -33,7 +33,7 @@ describe('RecipesController', () => {
       return Promise.resolve({
         _id: id,
         title: 'Recipe 1',
-        description: 'Description 1',
+        instructions: 'instructions 1',
         ingredients: ['ingredient 1'],
         imageUrl: '',
       });
@@ -76,14 +76,14 @@ describe('RecipesController', () => {
         {
           _id: '1',
           title: 'Recipe 1',
-          description: 'Description 1',
+          instructions: 'instructions 1',
           ingredients: ['ingredient 1'],
           imageUrl: '',
         },
         {
           _id: '2',
           title: 'Recipe 2',
-          description: 'Description 2',
+          instructions: 'instructions 2',
           ingredients: ['ingredient 2'],
           imageUrl: '',
         },
@@ -98,7 +98,7 @@ describe('RecipesController', () => {
     expect(result).toEqual({
       _id: '1',
       title: 'Recipe 1',
-      description: 'Description 1',
+      instructions: 'instructions 1',
       ingredients: ['ingredient 1'],
       imageUrl: '',
     });
@@ -108,7 +108,7 @@ describe('RecipesController', () => {
   it('should create a new recipe', async () => {
     const dto = {
       title: 'Recipe 3',
-      description: 'Description 3',
+      instructions: 'instructions 3',
       ingredients: ['ingredient 3'],
       imageUrl: '',
     };
@@ -120,7 +120,7 @@ describe('RecipesController', () => {
   it('should update a recipe', async () => {
     const dto = {
       title: 'Updated Recipe',
-      description: 'Updated Description',
+      instructions: 'Updated instructions',
       ingredients: ['ingredient 4'],
       imageUrl: '',
     };
