@@ -1,14 +1,14 @@
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
 import EditRecipePage from "@/pages/edit-recipe/[id]";
 import { useRouter } from "next/router";
-import axios from "axios";
+import api from "@/utils/fetcher";
 import "@testing-library/jest-dom";
 
 jest.mock("next/router", () => ({
   useRouter: jest.fn(),
 }));
 
-jest.mock("axios");
+jest.mock("../utils/fetcher");
 
 const mockRecipe = {
   _id: "1",
@@ -55,7 +55,7 @@ describe("EditRecipePage", () => {
   });
 
   it("submits the updated recipe successfully", async () => {
-    (axios.put as jest.Mock).mockResolvedValueOnce({});
+    (api.put as jest.Mock).mockResolvedValueOnce({});
 
     render(<EditRecipePage recipe={mockRecipe} />);
 
@@ -79,7 +79,7 @@ describe("EditRecipePage", () => {
 
     // Check if the put request was made with the correct form data
     await waitFor(() => {
-      expect(axios.put).toHaveBeenCalledWith(
+      expect(api.put).toHaveBeenCalledWith(
         `/api/recipes/${mockRecipe._id}`,
         expect.any(FormData),
         {
