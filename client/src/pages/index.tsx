@@ -57,13 +57,11 @@ const HomePage = () => {
           ) : recipes.length > 0 ? (
             recipes.map((recipe) => (
               <div key={recipe._id} className="border p-4 rounded shadow-md">
-                {recipe.imageUrl && (
-                  <img
-                    src={recipe.imageUrl}
-                    alt={recipe.title}
-                    className="w-full h-32 object-cover mb-2"
-                  />
-                )}
+                <img
+                  src={recipe.imageUrl || "/default.png"}
+                  alt={recipe.title}
+                  className="w-full h-32 object-cover mb-2"
+                />
                 <h2 className="text-xl font-semibold">{recipe.title}</h2>
                 <Link
                   className="text-blue-500 hover:underline"
