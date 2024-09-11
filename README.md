@@ -10,6 +10,7 @@ This project is a full-stack web application that allows users to manage a colle
 - [API Endpoints](#api-endpoints)
 - [Deployment](#deployment)
 - [Testing](#testing)
+- [Note on API Performance](#note-on-api-performance)
 
 ## Objective
 
@@ -125,3 +126,7 @@ To run the tests for both the frontend and backend, follow these steps:
 - Links to the deployed applications:
   - Frontend: [https://recipe-app-nu-drab.vercel.app](https://recipe-app-nu-drab.vercel.app)
   - Backend: [https://recipe-app-volg.onrender.com](https://recipe-app-volg.onrender.com)
+
+## Note on API Performance
+
+Please note that the API is hosted on a free server on Render, which may result in slower response times. The server provider automatically shuts down the API when it is not actively receiving requests, leading to some delays when starting up after a period of inactivity. If you experience slow responses, this is likely due to the server warming up.
